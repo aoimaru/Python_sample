@@ -1,41 +1,46 @@
 # coding: utf-8
 # Your code here!
 
-class Prioy:
-    def __init__(self, priority, require_days, start_day, end_days):
+class Task:
+    def __init__(self, priority, require, start_day, end_days):
         self.priority = priority
-        self.require_days = require_days
+        self.require = require
         self.start_day = start_day
         self.end_days = end_days
-    
-    def rest_days(self, done_days):
-        print(self.rest_days)
+
 
 def main():
     number_of_task = int(input())
-    informations = []
+    task_list = []
     for priority in range(number_of_task):
-        informations.append(Prioy(priority, *list(map(int, input().split()))))
+        task_list.append(Task(priority, *list(map(int, input().split()))))
     
-    for information in informations:
-        print(information.priority, information.require_days, information.start_day, information.end_days)
+    start_day = min([item.start_day for item in task_list])
+    
+    candidate_tasks = [item for item in task_list if item.start_day == start_day]
+    first_priority = min([item.priority for item in candidate_tasks])
+    current_task = [item for item in candidate_tasks if item.priority == first_priority][0]
+    print(current_task.require, current_task.start_day, current_task.end_days)
     
     
-    start_days = sorted([item.start_day for item in informations])
-    print(start_days)
-    
-    current_day = 0
+    current_time = 0
     while True:
-        current_day += 1
-        if current_day in start_days:
-            
-            
-            
-            break
+        current_time += 1
+        priority_list = [item for item in task_list if item.start_day <= current_time if not item.require == 0]
+        if priority_list:
+            if current_task.priority > min([item.priority for item in priority_list]):
+                current_task = [item for item in task_list if item.priority == min([item.priority for item in priority_list])][0]
         
+        current_task.require -= 1
+    
+        
+        
+
+
+
+
 
 
 if __name__ == "__main__":
     main()
     
-
