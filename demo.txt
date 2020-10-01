@@ -1,6 +1,0 @@
-#show a picture
-
-canvas = tkinter.Canvas(bg="black", width=660, height=500)
-canvas.place(x=-10, y=-10)
-img = ImageTk.PhotoImage(file="sample.png")
-canvas.create_image(0, 0, image=img)
