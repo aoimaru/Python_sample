@@ -41,9 +41,10 @@ def main():
         if number > 30:
             break
 
-        repository = g.get_repo(code.repository.full_name)
-        contents = repository.get_contents(code.path)
-        content = base64.b64decode(contents.content)
+        # repository = g.get_repo(code.repository.full_name)
+        # contents = repository.get_contents(code.path)
+        # content = base64.b64decode(contents.content)
+        content = code.decoded_content
 
         strings = str(content)
 
